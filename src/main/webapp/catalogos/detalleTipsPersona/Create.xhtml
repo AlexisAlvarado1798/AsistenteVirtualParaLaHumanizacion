@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/catalogos/templateAdmin.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateDetalleTipsPersonaTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="content">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateDetalleTipsPersonaLabel_pkDetalleTipsPersona}" for="pkDetalleTipsPersona" />
+                    <h:inputText id="pkDetalleTipsPersona" value="#{detalleTipsPersonaController.selected.pkDetalleTipsPersona}" title="#{bundle.CreateDetalleTipsPersonaTitle_pkDetalleTipsPersona}" required="true" requiredMessage="#{bundle.CreateDetalleTipsPersonaRequiredMessage_pkDetalleTipsPersona}"/>
+                    <h:outputLabel value="#{bundle.CreateDetalleTipsPersonaLabel_fecha}" for="fecha" />
+                    <h:inputText id="fecha" value="#{detalleTipsPersonaController.selected.fecha}" title="#{bundle.CreateDetalleTipsPersonaTitle_fecha}" required="true" requiredMessage="#{bundle.CreateDetalleTipsPersonaRequiredMessage_fecha}">
+                        <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateDetalleTipsPersonaLabel_fkPersona}" for="fkPersona" />
+                    <h:selectOneMenu id="fkPersona" value="#{detalleTipsPersonaController.selected.fkPersona}" title="#{bundle.CreateDetalleTipsPersonaTitle_fkPersona}" >
+                        <f:selectItems value="#{personaController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateDetalleTipsPersonaLabel_fkTips}" for="fkTips" />
+                    <h:selectOneMenu id="fkTips" value="#{detalleTipsPersonaController.selected.fkTips}" title="#{bundle.CreateDetalleTipsPersonaTitle_fkTips}" >
+                        <f:selectItems value="#{tipsController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{detalleTipsPersonaController.create}" value="#{bundle.CreateDetalleTipsPersonaSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{detalleTipsPersonaController.prepareList}" value="#{bundle.CreateDetalleTipsPersonaShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateDetalleTipsPersonaIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

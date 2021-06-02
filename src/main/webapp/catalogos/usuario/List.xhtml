@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/catalogos/templateAdmin.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListUsuarioTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="content">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false"
+                              value="#{bundle.ListUsuarioEmpty}" 
+                              rendered="#{usuarioController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{usuarioController.items.rowCount > 0}">
+     
+                    <p:dataTable value="#{usuarioController.items}" 
+                                 var="item" 
+                                 paginator="true"
+                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink}
+                                 {PreviusPageLink} {PageLinks} {NextPageLink} 
+                                 {LastPageLink} {RowPerPageDropdown}"
+                                 rowsPerPageTemplate="5,10,15">
+                        
+                        <p:column headerText="#{bundle.ListUsuarioTitle_nombreusuario}">
+                            <h:outputText value="#{item.nombreusuario}"/>
+                        </p:column>
+                        
+                        <p:column headerText="#{bundle.ListUsuarioTitle_fkEstadoUsario}"> 
+                            <h:outputText value="#{estadousuarioController.getEstadoUsuario(item.pkUsuario) ? 'Activo' : 'Inactivo'}" />
+                        </p:column>
+                        
+                        <p:column headerText="#{bundle.ListUsuarioTitle_fkPersona}">
+                            <h:outputText value="#{item.fkPersona.fkTipoidentificacion.codigo} - #{item.fkPersona.identificacion} / #{item.fkPersona.nombres} #{item.fkPersona.apellidos}"/>
+                        </p:column>
+                        
+                        <p:column headerText="#{bundle.ListUsuarioTitle_fkRol}">
+                            <h:outputText value="#{item.fkRol.descripcion}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{usuarioController.prepareView}" value="#{bundle.ListUsuarioViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{usuarioController.prepareEdit}" value="#{bundle.ListUsuarioEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{usuarioController.destroy}" value="#{bundle.ListUsuarioDestroyLink}"/>
+                        </p:column>
+                    </p:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{usuarioController.prepareCreate}" value="#{bundle.ListUsuarioCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListUsuarioIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

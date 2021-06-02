@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/catalogos/templateAdmin.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateTipsporrolTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="content">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateTipsporrolLabel_pkTipsporrol}" for="pkTipsporrol" />
+                    <h:inputText id="pkTipsporrol" value="#{tipsporrolController.selected.pkTipsporrol}" title="#{bundle.CreateTipsporrolTitle_pkTipsporrol}" required="true" requiredMessage="#{bundle.CreateTipsporrolRequiredMessage_pkTipsporrol}"/>
+                    <h:outputLabel value="#{bundle.CreateTipsporrolLabel_fkRol}" for="fkRol" />
+                    <h:selectOneMenu id="fkRol" value="#{tipsporrolController.selected.fkRol}" title="#{bundle.CreateTipsporrolTitle_fkRol}" required="true" requiredMessage="#{bundle.CreateTipsporrolRequiredMessage_fkRol}">
+                        <f:selectItems value="#{rolController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateTipsporrolLabel_fkTips}" for="fkTips" />
+                    <h:selectOneMenu id="fkTips" value="#{tipsporrolController.selected.fkTips}" title="#{bundle.CreateTipsporrolTitle_fkTips}" required="true" requiredMessage="#{bundle.CreateTipsporrolRequiredMessage_fkTips}">
+                        <f:selectItems value="#{tipsController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{tipsporrolController.create}" value="#{bundle.CreateTipsporrolSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{tipsporrolController.prepareList}" value="#{bundle.CreateTipsporrolShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateTipsporrolIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

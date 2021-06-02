@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition template="/template.xhtml">
+        <ui:define name="content">
+            Hola, Estoy en otro formulario, un formulario solo de admin
+            <h:form>
+                <p:fileUpload id="file" value="#{fileUploadView.file}" multiple="false" mode="advanced"
+                              uploadLabel="Cargar" label="Seleccionar" cancelLabel="Cancelar"
+                              fileLimit="1" fileLimitMessage="Solo puede cargar un solo Archivo"
+                              invalidSizeMessage="El tama&ntilde; o m&aacute;ximo del archivo es de 6 Mb"
+                              invalidFileMessage="Tipo de Archivo no Soportado"
+                              allowTypes="/(\.|\/)(jpg|png|jpeg|gif|doc|docx|xls|xlsl|pdf|txt|rar|zip)$/"
+                              sizeLimit="6291456"
+                              fileUploadListener="#{fileUploadView.seleccionarArchivo}" 
+                              dragDropSupport="true"/>
+                <p:growl id="messages" showDetail="true"/>
+            </h:form>
+            <p:separator></p:separator>
+            <p:media value="https://www.youtube.com" width="420" height="315" player="flash" />
+            <h3>PDF</h3>
+            <object type="application/pdf" data="#{request.contextPath}/resources/assets/prueba.pdf?pfdrid_c=true" width="100%" height="300px">
+                Your browser can't display pdf, <a href="#{request.contextPath}/resources/assets/prueba.pdf">Click</a>
+                to dowload pdf instead
+            </object>
+        </ui:define>
+    </ui:composition>
+</html>

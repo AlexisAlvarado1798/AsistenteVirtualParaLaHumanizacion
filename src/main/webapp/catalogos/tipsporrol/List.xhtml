@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/catalogos/templateAdmin.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListTipsporrolTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="content">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListTipsporrolEmpty}" rendered="#{tipsporrolController.items.rowCount == 0}"/>
+                <br></br>
+                <h:panelGroup rendered="#{tipsporrolController.items.rowCount > 0}">
+                    <p:dataTable value="#{tipsporrolController.items}" var="item">
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTipsporrolTitle_fkRol}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fkRol.descripcion}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTipsporrolTitle_fkTips}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fkTips.descripcion}"/>
+                        </p:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{tipsporrolController.prepareView}" value="#{bundle.ListTipsporrolViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{tipsporrolController.prepareEdit}" value="#{bundle.ListTipsporrolEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{tipsporrolController.destroy}" value="#{bundle.ListTipsporrolDestroyLink}"/>
+                        </h:column>
+                    </p:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{tipsporrolController.prepareCreate}" value="#{bundle.ListTipsporrolCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListTipsporrolIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

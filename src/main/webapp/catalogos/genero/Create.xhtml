@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/catalogos/templateAdmin.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateGeneroTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="content">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateGeneroLabel_pkGenero}" for="pkGenero" />
+                    <h:inputText id="pkGenero" value="#{generoController.selected.pkGenero}" title="#{bundle.CreateGeneroTitle_pkGenero}" required="true" requiredMessage="#{bundle.CreateGeneroRequiredMessage_pkGenero}"/>
+                    <h:outputLabel value="#{bundle.CreateGeneroLabel_codigo}" for="codigo" />
+                    <h:inputText id="codigo" value="#{generoController.selected.codigo}" title="#{bundle.CreateGeneroTitle_codigo}" required="true" requiredMessage="#{bundle.CreateGeneroRequiredMessage_codigo}"/>
+                    <h:outputLabel value="#{bundle.CreateGeneroLabel_descripcion}" for="descripcion" />
+                    <h:inputText id="descripcion" value="#{generoController.selected.descripcion}" title="#{bundle.CreateGeneroTitle_descripcion}" required="true" requiredMessage="#{bundle.CreateGeneroRequiredMessage_descripcion}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{generoController.create}" value="#{bundle.CreateGeneroSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{generoController.prepareList}" value="#{bundle.CreateGeneroShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateGeneroIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

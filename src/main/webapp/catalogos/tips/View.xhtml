@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/catalogos/templateAdmin.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewTipsTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="content">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewTipsLabel_pkTips}"/>
+                    <h:outputText value="#{tipsController.selected.pkTips}" title="#{bundle.ViewTipsTitle_pkTips}"/>
+                    <h:outputText value="#{bundle.ViewTipsLabel_codigo}"/>
+                    <h:outputText value="#{tipsController.selected.codigo}" title="#{bundle.ViewTipsTitle_codigo}"/>
+                    <h:outputText value="#{bundle.ViewTipsLabel_descripcion}"/>
+                    <h:outputText value="#{tipsController.selected.descripcion}" title="#{bundle.ViewTipsTitle_descripcion}"/>
+                    <h:outputText value="#{bundle.ViewTipsLabel_fkRol}"/>
+                    <h:outputText value="#{tipsController.selected.fkRol}" title="#{bundle.ViewTipsTitle_fkRol}"/>
+                    <h:outputText value="#{bundle.ViewTipsLabel_fkTips}"/>
+                    <h:outputText value="#{tipsController.selected.fkTips}" title="#{bundle.ViewTipsTitle_fkTips}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{tipsController.destroyAndView}" value="#{bundle.ViewTipsDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewTipsEditLink}"/>
+                <br />
+                <h:commandLink action="#{tipsController.prepareCreate}" value="#{bundle.ViewTipsCreateLink}" />
+                <br />
+                <h:commandLink action="#{tipsController.prepareList}" value="#{bundle.ViewTipsShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewTipsIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

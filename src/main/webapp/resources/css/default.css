@@ -1,0 +1,66 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 23/04/2021, 07:24:04 PM
+    Author     : AdminAlexisAlvarado
+*/
+
+body {
+    background-color: #ffffff;
+    font-size: 12px;
+    font-family: Verdana, "Verdana CE",  Arial, "Arial CE", "Lucida Grande CE", lucida, "Helvetica CE", sans-serif;
+    color: #000000;  
+    margin: 10px;
+}
+
+h1 {
+    font-family: Arial, "Arial CE", "Lucida Grande CE", lucida, "Helvetica CE", sans-serif;
+    border-bottom: 1px solid #AFAFAF; 
+    font-size:  16px;
+    font-weight: bold;
+    margin: 0px;
+    padding: 0px;
+    color: #D20005;
+}
+
+a:link, a:visited {
+  color: #045491;
+  font-weight : bold;
+  text-decoration: none;
+}
+
+a:link:hover, a:visited:hover  {
+  color: #045491;
+  font-weight : bold;
+  text-decoration : underline;
+}
+
+/*Clase utilizada en las vistas para poner un asterisco (*) indicando que el campo es obligatorio */
+.asterisco{
+    font-size: 12pt; 
+    vertical-align: middle;
+    font-weight: bold; 
+    color: #e33b06;
+}
+
+/*Clase utilizada para dar instrucciones al usuario que determinados campos son obligatorios*/
+.msjObligatorios{
+    font-size: 12pt;    
+    color: #e33b06;
+    display: block;
+    margin-top: 20px;
+}
+
+.cc{
+    background-color: #e33b06 !important;
+    background-image: none !important;
+    color: #000000 !important;
+}
+
+.titleAsistente{
+    text-align: center;
+}
+

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/catalogos/templateAdmin.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListAccionpermitidaporusuarioTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="content">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListAccionpermitidaporusuarioEmpty}" rendered="#{accionpermitidaporusuarioController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{accionpermitidaporusuarioController.items.rowCount > 0}">
+                    <h:outputText value="#{accionpermitidaporusuarioController.pagination.pageFirstItem + 1}..#{accionpermitidaporusuarioController.pagination.pageLastItem + 1}/#{accionpermitidaporusuarioController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{accionpermitidaporusuarioController.previous}" value="#{bundle.Previous} #{accionpermitidaporusuarioController.pagination.pageSize}" rendered="#{accionpermitidaporusuarioController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{accionpermitidaporusuarioController.next}" value="#{bundle.Next} #{accionpermitidaporusuarioController.pagination.pageSize}" rendered="#{accionpermitidaporusuarioController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{accionpermitidaporusuarioController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAccionpermitidaporusuarioTitle_pkAccperusu}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.pkAccperusu}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAccionpermitidaporusuarioTitle_fkAccionpermitida}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fkAccionpermitida}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListAccionpermitidaporusuarioTitle_fkUsuario}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fkUsuario}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{accionpermitidaporusuarioController.prepareView}" value="#{bundle.ListAccionpermitidaporusuarioViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{accionpermitidaporusuarioController.prepareEdit}" value="#{bundle.ListAccionpermitidaporusuarioEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{accionpermitidaporusuarioController.destroy}" value="#{bundle.ListAccionpermitidaporusuarioDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{accionpermitidaporusuarioController.prepareCreate}" value="#{bundle.ListAccionpermitidaporusuarioCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListAccionpermitidaporusuarioIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

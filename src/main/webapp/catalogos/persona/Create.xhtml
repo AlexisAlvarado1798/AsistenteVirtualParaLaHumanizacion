@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/catalogos/templateAdmin.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreatePersonaTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="content">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:outputLabel class="msjObligatorios" value="#{bundle.MsjObligatorios}" />
+                <p:separator></p:separator>
+                
+                <h:panelGrid columns="3">
+                    
+                    <p:outputLabel value="#{bundle.CreatePersonaLabel_fkTipoidentificacion}" 
+                                   for="fkTipoidentificacion" />
+                    <p:selectOneMenu id="fkTipoidentificacion" 
+                                     value="#{personaController.selected.fkTipoidentificacion}" 
+                                     title="#{bundle.CreatePersonaTitle_fkTipoidentificacion}" 
+                                     required="true" 
+                                     requiredMessage="#{bundle.CreatePersonaRequiredMessage_fkTipoidentificacion}">
+                        <f:selectItem itemLabel="Seleccione un Tipo ID" itemValue="" noSelectionOption="true" />
+                        <f:selectItems value="#{tipoidentificacionController.itemsAvailableSelectOne}"/>
+                    </p:selectOneMenu>
+                    <p:outputLabel value="*" class="asterisco"></p:outputLabel>   
+                    
+                    <p:outputLabel value="#{bundle.CreatePersonaLabel_identificacion}" 
+                                   for="identificacion" />
+                    <p:inputText id="identificacion" 
+                                 value="#{personaController.selected.identificacion}" 
+                                 title="#{bundle.CreatePersonaTitle_identificacion}" 
+                                 required="true" 
+                                 requiredMessage="#{bundle.CreatePersonaRequiredMessage_identificacion}"
+                                 maxlength="11">
+                        <p:keyFilter regEx="/[0-9]/i" />
+                    </p:inputText>
+                    <p:outputLabel value="*" class="asterisco"></p:outputLabel>
+                    
+                    <p:outputLabel value="#{bundle.CreatePersonaLabel_nombres}" 
+                                   for="nombres" />
+                    <p:inputText id="nombres" 
+                                 value="#{personaController.selected.nombres}" 
+                                 title="#{bundle.CreatePersonaTitle_nombres}" 
+                                 required="true" 
+                                 requiredMessage="#{bundle.CreatePersonaRequiredMessage_nombres}"
+                                 maxlength="30">
+                        <p:keyFilter regEx="/[A-ZÑ]/i" />
+                    </p:inputText>
+                    <p:outputLabel value="*" class="asterisco"></p:outputLabel>
+
+                    <p:outputLabel value="#{bundle.CreatePersonaLabel_apellidos}" 
+                                   for="apellidos" />
+                    <p:inputText id="apellidos" 
+                                 value="#{personaController.selected.apellidos}" 
+                                 title="#{bundle.CreatePersonaTitle_apellidos}" 
+                                 required="true"
+                                 requiredMessage="#{bundle.CreatePersonaRequiredMessage_apellidos}">
+                        <p:keyFilter regEx="/[A-ZÑ]/i" />
+                    </p:inputText>
+                    <p:outputLabel value="*" class="asterisco"></p:outputLabel>
+
+                    
+                    <p:outputLabel value="#{bundle.CreatePersonaLabel_fechanacimiento}" 
+                                   for="fechanacimiento" />
+                    <p:calendar  id="fechanacimiento" 
+                                 value="#{personaController.selected.fechanacimiento}"
+                                 locale="es" navigator="true" pattern="dd/MM/yyyy"
+                                 maxdate="today();" class=""/>      
+                    <p:outputLabel value="*" class="asterisco"></p:outputLabel>
+
+                    <p:outputLabel value="#{bundle.CreatePersonaLabel_direccion}" 
+                                   for="direccion" />
+                    <p:inputText id="direccion" 
+                                 value="#{personaController.selected.direccion}" 
+                                 title="#{bundle.CreatePersonaTitle_direccion}" 
+                                 maxlength="40" class="wallet" />
+                    <p:outputLabel value="*" class="asterisco"></p:outputLabel>
+                    
+                    <p:outputLabel value="#{bundle.CreatePersonaLabel_correo}" for="correo" />
+                    <p:inputText id="correo"
+                                 value="#{personaController.selected.correo}" 
+                                 title="#{bundle.CreatePersonaTitle_correo}" required="true"
+                                 placeholder="ejemplo@dominio.com" 
+                                 validatorMessage="El correo no tiene formato valido" 
+                                 requiredMessage="#{bundle.CreatePersonaRequiredMessage_correo}"
+                                 maxlength="30">
+                        <p:keyFilter regEx="/[a-z0-9_\.\-@]/i" />
+                        <f:validateRegex for="correo" pattern="^([\w\d\-\.]+)@{1}(([\w\d\-]{1,67})|([\w\d\-]+\.[\w\d\-]{1,67}))\.(([a-zA-Z\d]{2,4})(\.[a-zA-Z\d]{2})?)$"/>        
+                    </p:inputText>
+                    <p:outputLabel value="*" class="asterisco"></p:outputLabel>
+                    
+                    <p:outputLabel value="#{bundle.CreatePersonaLabel_fkGenero}" for="fkGenero" />
+                    <p:selectOneMenu id="fkGenero" 
+                                     value="#{personaController.selected.fkGenero}" 
+                                     title="#{bundle.CreatePersonaTitle_fkGenero}" 
+                                     required="true" 
+                                     requiredMessage="#{bundle.CreatePersonaRequiredMessage_fkGenero}">
+                        <f:selectItem itemLabel="Seleccione un Genero" itemValue="" noSelectionOption="true" />
+                        <f:selectItems value="#{generoController.itemsAvailableSelectOne}"/>
+                    </p:selectOneMenu>
+                    <p:outputLabel value="*" class="asterisco"></p:outputLabel>
+                    
+                    <p:outputLabel value="Departamento: " for="depto" />
+                    <p:selectOneMenu id="depto"
+                                     value="#{personaController.departamento}">
+                        <p:ajax listener="#{ubicacionGeograficaController.onDepartamentChange(personaController.departamento)}" update="municipio"/>
+                        <f:selectItem itemLabel="Seleccione un Departamento" itemValue="" noSelectionOption="true" />
+                        <f:selectItems value="#{ubicacionGeograficaController.departamentos}"/>
+                    </p:selectOneMenu>
+                    <p:outputLabel value="*" class="asterisco"></p:outputLabel>
+                    
+                    <p:outputLabel value="#{bundle.CreatePersonaLabel_fkMunicipioorigen}" 
+                                   for="municipio" />
+                    <p:selectOneMenu id="municipio" 
+                                     value="#{personaController.selected.fkMunicipioorigen}"
+                                     title="#{bundle.CreatePersonaTitle_fkMunicipioorigen}"
+                                     required="true" 
+                                     requiredMessage="#{bundle.CreatePersonaRequiredMessage_fkMunicipioorigen}">
+                        <f:selectItem itemLabel="Seleccione un Municipio" itemValue="" noSelectionOption="true" />
+                        <f:selectItems value="#{ubicacionGeograficaController.municipios}"/>
+                    </p:selectOneMenu>
+                    <p:outputLabel value="*" class="asterisco"></p:outputLabel>
+                                        
+                    <p:outputLabel value="#{bundle.CreatePersonaLabel_fkEstadocivil}" for="fkEstadocivil" />
+                    <p:selectOneMenu id="fkEstadocivil" value="#{personaController.selected.fkEstadocivil}" 
+                                     title="#{bundle.CreatePersonaTitle_fkEstadocivil}" >
+                        <f:selectItem itemLabel="Seleccione un Estado Civil" itemValue="" noSelectionOption="true" />
+                        <f:selectItems value="#{estadocivilController.itemsAvailableSelectOne}"/>
+                    </p:selectOneMenu>
+                    <p:outputLabel value="*" class="asterisco"></p:outputLabel>
+                    
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{personaController.create}" value="#{bundle.CreatePersonaSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{personaController.prepareList}" value="#{bundle.CreatePersonaShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreatePersonaIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

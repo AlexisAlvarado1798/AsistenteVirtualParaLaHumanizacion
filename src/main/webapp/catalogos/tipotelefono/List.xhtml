@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/catalogos/templateAdmin.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListTipotelefonoTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="content">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListTipotelefonoEmpty}" rendered="#{tipotelefonoController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{tipotelefonoController.items.rowCount > 0}">
+                    <h:outputText value="#{tipotelefonoController.pagination.pageFirstItem + 1}..#{tipotelefonoController.pagination.pageLastItem + 1}/#{tipotelefonoController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{tipotelefonoController.previous}" value="#{bundle.Previous} #{tipotelefonoController.pagination.pageSize}" rendered="#{tipotelefonoController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{tipotelefonoController.next}" value="#{bundle.Next} #{tipotelefonoController.pagination.pageSize}" rendered="#{tipotelefonoController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{tipotelefonoController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTipotelefonoTitle_pkTipotelefono}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.pkTipotelefono}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTipotelefonoTitle_codigo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.codigo}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListTipotelefonoTitle_descripcion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.descripcion}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{tipotelefonoController.prepareView}" value="#{bundle.ListTipotelefonoViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{tipotelefonoController.prepareEdit}" value="#{bundle.ListTipotelefonoEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{tipotelefonoController.destroy}" value="#{bundle.ListTipotelefonoDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{tipotelefonoController.prepareCreate}" value="#{bundle.ListTipotelefonoCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListTipotelefonoIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
